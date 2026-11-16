@@ -1,36 +1,24 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SAPScope AI — Micro-SaaS B2B de Levantamiento y Estimación SAP
 
-## Getting Started
+**Link de la aplicación desplegada:** [PEGAR_AQUI_LINK_VERCEL]  
+**Repositorio GitHub:** [PEGAR_AQUI_LINK_GITHUB]
 
-First, run the development server:
+## 1. Propuesta de Producto
+- **Problema:** Los equipos de preventa y consultoría SAP pierden horas clasificando requerimientos funcionales ambiguos de clientes y estimando esfuerzos manualmente.
+- **Usuario objetivo:** Consultores SAP, Líderes de Proyecto (PM) y áreas de Preventa B2B.
+- **Base de datos:** PostgreSQL gestionado en **Supabase** (`tabla: sap_requirements`), con persistencia en tiempo real para operaciones CRUD completas (registro, filtrado, edición de estado/horas y eliminación).
+- **Monetización:** Suscripción B2B mensual por niveles (Starter $29/mes, Consultora Pro $99/mes, Enterprise $249/mes).
+- **Evolución a Productivo:** Autenticación multi-empresa (Supabase Auth + RLS), conexión directa a LLM vía backend para generación de documentos de alcance (SOW) en PDF e integración vía API con Jira y SAP Cloud ALM.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 2. Explicación del Uso de IA durante el Desarrollo
+1. **Herramientas utilizadas:** Gemini para arquitectura de producto, diseño del esquema SQL y generación acelerada de componentes React/TypeScript.
+2. **Prompts principales utilizados:**
+   - *"Diseña un micro-SaaS B2B enfocado en consultoría SAP con un esquema PostgreSQL limpio y operaciones CRUD."*
+   - *"Genera un componente Next.js App Router con Tailwind CSS conectado a Supabase que incluya un asistente de clasificación automática de módulos SAP (FI, MM, SD, ABAP, BTP)."*
+3. **Código generado con apoyo de IA:** Estructura inicial de la interfaz en Tailwind CSS, cliente de conexión a Supabase y lógica heurística de sugerencia de módulos SAP.
+4. **Decisiones técnicas tomadas por mí:**
+   - Elegir **Next.js + Supabase + Vercel** para minimizar latencia de despliegue y mantener tipado estricto con TypeScript.
+   - Incorporar edición inline tanto de estado (`Pendiente`, `En Revisión`, `Aprobado`, `Descartado`) como de horas estimadas para reflejar el flujo real de aprobación comercial.
+   - Configurar variables de entorno (`NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY`) separadas del código fuente.
+5. **Errores encontrados y solución:**
+   - *Bloqueo de inserciones por Row Level Security (RLS) en Supabase:* Al crear la tabla por defecto, Supabase bloquea escrituras anónimas. Se resolvió configurando explícitamente el esquema SQL para el MVP y documentando el uso de políticas RLS por `tenant_id` para la fase productiva.
