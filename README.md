@@ -1,7 +1,5 @@
 # SAPScope AI — Micro-SaaS B2B de Levantamiento y Estimación SAP
 
-**Link de la aplicación desplegada:** [PEGAR_AQUI_LINK_VERCEL]  
-**Repositorio GitHub:** [PEGAR_AQUI_LINK_GITHUB]
 
 ## 1. Propuesta de Producto
 - **Problema:** Los equipos de preventa y consultoría SAP pierden horas clasificando requerimientos funcionales ambiguos de clientes y estimando esfuerzos manualmente.
